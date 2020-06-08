@@ -13,7 +13,7 @@ from PIL import Image
 # Dataset Processing
 
 path = 'https://raw.githubusercontent.com/IP2014336/DVCLASS/master/'
-df = pd.read_csv(path + 'THERanking.csv', sep=';', engine='python')
+df = pd.read_csv(path + 'THERanking.csv', sep=';', engine='python', encoding='utf-8')
 #still-life-851328_1920.jpg
 
 img = Image.open(r"C:\Users\inesp\Downloads\still-life-851328_1920.jpg")
