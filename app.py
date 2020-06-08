@@ -91,7 +91,7 @@ SliderYear = dcc.RangeSlider(
 )
 
 app = dash.Dash(__name__)
-#server = app.server
+server = app.server
 
 app.layout = html.Div([
     # Overall Title
