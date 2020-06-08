@@ -91,7 +91,7 @@ SliderYear = dcc.RangeSlider(
 )
 
 app = dash.Dash(__name__)
-server = app.server
+#server = app.server
 
 app.layout = html.Div([
     # Overall Title
@@ -478,15 +478,19 @@ def update_graph(university):
                                     line=dict(width=1,
                                               color='DarkSlateGrey')),
                         selector=dict(mode='markers'))
-    measure1 = px.bar(data_frame=df_univ, x=df_univ['Year'], y=df_univ['Number_students'], orientation='v', opacity=0.9,
+    dfm1 = df_univ[['Year', 'Number_students']]
+    measure1 = px.bar(data_frame=dfm1, x=dfm1['Year'], y=dfm1['Number_students'], orientation='v', opacity=0.9,
                       barmode='relative', height=218, width=210, color_discrete_sequence=["DarkCyan"],
                       title={'text': 'Nº of Students', 'y': 0.95, 'x': 0.6, 'xanchor': 'center', 'yanchor': 'top'})
     measure1.update_layout(margin=dict(l=10, r=10, t=30, b=5), paper_bgcolor="rgba(95, 158, 160, 0)",
                            font=dict(size=10))
     measure1['layout']['yaxis']['title']['text'] = ''
     measure1['layout']['xaxis']['title']['text'] = ''
+    measure1.update_xaxes(showgrid=False, zeroline=False)
+    measure1.update_yaxes(showgrid=False, zeroline=False)
 
-    measure2 = px.bar(data_frame=df_univ, x=df_univ['Year'], y=df_univ['Numbstudentsper_Staff'], orientation='v',
+    dfm2 = df_univ[['Year', 'Numbstudentsper_Staff']]
+    measure2 = px.bar(data_frame=dfm2, x=dfm2['Year'], y=dfm2['Numbstudentsper_Staff'], orientation='v',
                       opacity=0.9, barmode='relative', height=218, width=210, color_discrete_sequence=["CadetBlue"],
                       title={'text': 'Nº of Students per staff', 'y': 0.95, 'x': 0.6, 'xanchor': 'center',
                              'yanchor': 'top'})
@@ -494,38 +498,53 @@ def update_graph(university):
                            font=dict(size=10))
     measure2['layout']['yaxis']['title']['text'] = ''
     measure2['layout']['xaxis']['title']['text'] = ''
+    measure2.update_xaxes(showgrid=False, zeroline=False)
+    measure2.update_yaxes(showgrid=False, zeroline=False)
 
-    measure3 = px.bar(data_frame=df_univ, x=df_univ['Year'], y=df_univ['Teaching'], orientation='v', opacity=0.9,
+    dfm3 = df_univ[['Year', 'Teaching']]
+    measure3 = px.bar(data_frame=dfm3, x=dfm3['Year'], y=dfm3['Teaching'], orientation='v', opacity=0.9,
                       barmode='relative', height=218, width=210, color_discrete_sequence=["DarkSeaGreen"],
                       title={'text': 'Teaching', 'y': 0.95, 'x': 0.6, 'xanchor': 'center', 'yanchor': 'top'})
     measure3.update_layout(margin=dict(l=10, r=10, t=30, b=5), paper_bgcolor="rgba(95, 158, 160, 0)",
                            font=dict(size=10))
     measure3['layout']['yaxis']['title']['text'] = ''
     measure3['layout']['xaxis']['title']['text'] = ''
+    measure3.update_xaxes(showgrid=False, zeroline=False)
+    measure3.update_yaxes(showgrid=False, zeroline=False)
 
-    measure4 = px.bar(data_frame=df_univ, x=df_univ['Year'], y=df_univ['Research'], orientation='v', opacity=0.9,
+    dfm4 = df_univ[['Year', 'Research']]
+    measure4 = px.bar(data_frame=dfm4, x=dfm4['Year'], y=dfm4['Research'], orientation='v', opacity=0.9,
                       barmode='relative', height=218, width=210, color_discrete_sequence=["ForestGreen"],
                       title={'text': 'Research', 'y': 0.95, 'x': 0.6, 'xanchor': 'center', 'yanchor': 'top'})
     measure4.update_layout(margin=dict(l=10, r=10, t=30, b=5), paper_bgcolor="rgba(95, 158, 160, 0)",
                            font=dict(size=10))
     measure4['layout']['yaxis']['title']['text'] = ''
     measure4['layout']['xaxis']['title']['text'] = ''
+    measure4.update_xaxes(showgrid=False, zeroline=False)
+    measure4.update_yaxes(showgrid=False, zeroline=False)
 
-    measure5 = px.bar(data_frame=df_univ, x=df_univ['Year'], y=df_univ['Citations'], orientation='v', opacity=0.9,
+    dfm5 = df_univ[['Year', 'Citations']]
+    measure5 = px.bar(data_frame=dfm5, x=dfm5['Year'], y=dfm5['Citations'], orientation='v', opacity=0.9,
                       barmode='relative', height=218, width=210, color_discrete_sequence=["DarkOliveGreen"],
                       title={'text': 'Citations', 'y': 0.95, 'x': 0.6, 'xanchor': 'center', 'yanchor': 'top'})
     measure5.update_layout(margin=dict(l=10, r=10, t=30, b=10), paper_bgcolor="rgba(95, 158, 160, 0)",
                            font=dict(size=10))
     measure5['layout']['yaxis']['title']['text'] = ''
+    measure5.update_xaxes(showgrid=False, zeroline=False)
+    measure5.update_yaxes(showgrid=False, zeroline=False)
 
-    measure6 = px.bar(data_frame=df_univ, x=df_univ['Year'], y=df_univ['Industry_Income'], orientation='v', opacity=0.9,
+    dfm6 = df_univ[['Year', 'Industry_Income']]
+    measure6 = px.bar(data_frame=dfm6, x=dfm6['Year'], y=dfm6['Industry_Income'], orientation='v', opacity=0.9,
                       barmode='relative', height=218, width=210, color_discrete_sequence=["DarkSlateGrey"],
                       title={'text': 'Industry Outcome', 'y': 0.95, 'x': 0.6, 'xanchor': 'center', 'yanchor': 'top'})
     measure6.update_layout(margin=dict(l=10, r=10, t=30, b=10), paper_bgcolor="rgba(95, 158, 160, 0)",
                            font=dict(size=10))
     measure6['layout']['yaxis']['title']['text'] = ''
+    measure6.update_xaxes(showgrid=False, zeroline=False)
+    measure6.update_yaxes(showgrid=False, zeroline=False)
 
-    measure7 = px.bar(data_frame=df_univ, x=df_univ['Year'], y=df_univ['International_Outlook'], orientation='v',
+    dfm7 = df_univ[['Year', 'International_Outlook']]
+    measure7 = px.bar(data_frame=dfm7, x=dfm7['Year'], y=dfm7['International_Outlook'], orientation='v',
                       opacity=0.9,
                       barmode='relative', height=218, width=210, color_discrete_sequence=["Gray"],
                       title={'text': 'International Outlook', 'y': 0.95, 'x': 0.6, 'xanchor': 'center',
@@ -533,14 +552,18 @@ def update_graph(university):
     measure7.update_layout(margin=dict(l=10, r=10, t=30, b=10), paper_bgcolor="rgba(95, 158, 160, 0)",
                            font=dict(size=10))
     measure7['layout']['yaxis']['title']['text'] = ''
+    measure7.update_xaxes(showgrid=False, zeroline=False)
+    measure7.update_yaxes(showgrid=False, zeroline=False)
 
-    measure8 = px.bar(data_frame=df_univ, x=df_univ['Year'], y=df_univ['Pct_Female'], orientation='v', opacity=0.9,
+    dfm8 = df_univ[['Year', 'Pct_Female']]
+    measure8 = px.bar(data_frame=dfm8, x=dfm8['Year'], y=dfm8['Pct_Female'], orientation='v', opacity=0.9,
                       barmode='relative', height=218, width=210, color_discrete_sequence=["DarkKhaki"],
                       title={'text': '% Females & Males', 'y': 0.95, 'x': 0.6, 'xanchor': 'center', 'yanchor': 'top'})
     measure8.update_layout(margin=dict(l=10, r=10, t=30, b=10), paper_bgcolor="rgba(95, 158, 160, 0)",
                            font=dict(size=10))
     measure8['layout']['yaxis']['title']['text'] = ''
-
+    measure8.update_xaxes(showgrid=False, zeroline=False)
+    measure8.update_yaxes(showgrid=False, zeroline=False)
     return figun, measure1, measure2, measure3, measure4, measure5, measure6, measure7, measure8
 
 
