@@ -1,3 +1,3 @@
 # Deploying your Dash app online
 
-Enjoy at https://dvclasstest.herokuapp.com/
+Enjoy at https://topuniversities.herokuapp.com/
