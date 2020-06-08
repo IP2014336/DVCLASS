@@ -8,5 +8,5 @@ dash-core-components
 pandas
 numpy
 dash_bootstrap_components
-PIL
+pillow
 io
