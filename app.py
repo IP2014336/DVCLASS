@@ -33,8 +33,8 @@ from io import BytesIO
 #   7.3 > Tab de Países
 #     7.3.1 > Menu de país
 #     7.3.2 > Call Cards do top 3 nacional
-#     7.3.3 > Menu de intervalo de datas
-#     7.3.4 > Call de gráfico das universidades do país
+#     7.3.3 > Call de gráfico das universidades do país
+#     7.3.4 > Menu de intervalo de datas
 #   7.4 > Tab de Universidades
 #     7.4.1 > Menu de universidade
 #     7.4.2 > Call de scatter plot de evolução do score da universidade
@@ -217,12 +217,12 @@ def render_content(tab):
                 # 7.2.2 > Call Gráfico Globo
                 html.Div([dcc.Graph(id='globe')],
                          style={'marginTop': 5, 'padding': '5px', 'backgroundColor': colors['background'],
-                                'border': 'thin solid #888888', 'box-shadow': '2px 2px #888888', 'width': '38.5%',
+                                'border': 'thin solid #888888', 'box-shadow': '2px 2px #888888', 'width': '44%',
                                 'height': '380px'}),
                 html.Div(html.Br(), style={'width': '1%', 'opacity': '0%', 'height': '390px'}),
                 # 7.2.3 > Call Gráfico Paises com mais universidades no top200
                 html.Div([dcc.Graph(id='top10country')],
-                         style={'marginTop': 5, 'box-shadow': '2px 2px #888888', 'width': '60%',
+                         style={'marginTop': 5, 'box-shadow': '2px 2px #888888', 'width': '55%',
                                 'border': 'thin solid #888888', 'height': '390px'})
             ], style={'display': 'flex', 'textAlign': 'center', 'height': '390px'}),
             html.Div(html.Br(), style={'opacity': '0%', 'height': '10px'}),
@@ -255,15 +255,15 @@ def render_content(tab):
             ], style={'padding': '5px', 'border': 'thin solid #888888',
                       'box-shadow': '5px 5px #888888', 'backgroundColor': colors['background']}),
             html.Div([html.Br()], style={'height': '7px'}),
-            # 7.3.3 > Menu de intervalo de datas
-            html.Div([html.H3(children='Choose time frame:', style={'marginTop': '0px', 'marginBottom': '0px'}),
+            # 7.3.3 > Call de gráfico das universidades do país
+            html.Div([html.Div([dcc.Graph(id='country')])],
+                     style={'textAlign': 'center', 'padding': '2px', 'border': 'thin solid #888888', 'marginTop': '0px',
+                            'box-shadow': '5px 5px #888888', 'backgroundColor': colors['background']}),
+            # 7.3.4 > Menu de intervalo de datas
+            html.Div([html.H3(children='Update time frame:', style={'marginTop': '0px', 'marginBottom': '0px'}),
                       html.Div([SliderYear], style={'padding-left': '30%', 'padding-right': '30%'})],
                      style={'textAlign': 'center', 'padding': '5px', 'border': 'thin solid #888888',
                             'box-shadow': '5px 5px #888888', 'backgroundColor': 'white'}),
-            # 7.3.4 > Call de gráfico das universidades do país
-            html.Div([html.Div([dcc.Graph(id='country')])],
-                     style={'textAlign': 'center', 'padding': '2px', 'border': 'thin solid #888888', 'marginTop': '0px',
-                            'box-shadow': '5px 5px #888888', 'backgroundColor': colors['background']})
         ])
     elif tab == 'tab-4':  # 7.4 > Tab de Universidades
         return html.Div([
@@ -419,11 +419,13 @@ def update_graph(year2):
     figtopu.update_layout(margin=dict(l=20, r=20, t=40, b=20), titlefont=dict(size=15),
                           title={'y': 0.95, 'x': 0.5, 'xanchor': 'center', 'yanchor': 'top'})
     figtopu.update_layout({'paper_bgcolor': 'rgba(255, 255, 255, 0)'})
-
-    # 8.2 > Define gráfico dos Paises com mais univ no top 200
-    df_topc = df_year2.loc[df_year2['Rank'] <= 200][['Country', 'Rank', 'University']]
+    figtopu.update_layout(yaxis_categoryorder='total ascending')
+    #   8.2 > Define gráfico dos Paises com mais univ no top 200
+    df_topc = df_year2.loc[df_year2['Rank'] <= 200][['Country', 'Rank', 'University', 'ScoreResult']]
     countrylist = df_topc['Country'].value_counts()[:10].sort_values(ascending=False).index
     df_topc3 = df_topc[df_topc['Country'].isin(countrylist)]
+    df_topc3.loc[:, 'count'] = df_topc3.groupby('Country')['Country'].transform('count')
+    df_topc3 = df_topc3.sort_values(by=['count', 'Rank'], ascending=False)
     figtopc = px.bar(data_frame=df_topc3,
                      x=df_topc3['Rank'],
                      y=df_topc3['Country'],
@@ -435,7 +437,8 @@ def update_graph(year2):
                      barmode='relative',
                      height=390,
                      title='<b>TOP 10 Countries with most universities on TOP 200 in ' + str(year2))
-    figtopc.update_layout(margin=dict(l=20, r=20, t=40, b=20), titlefont=dict(size=15),
+    figtopc.update_layout(margin=dict(l=20, r=20, t=40, b=20), titlefont=dict(size=15), showlegend=False,
+                          xaxis=dict(title='<i><b>Stacked Ranks', showgrid=False, zeroline=False, showticklabels=False),
                           title={'y': 0.95, 'x': 0.5, 'xanchor': 'center', 'yanchor': 'top'})
 
     # 8.3 > Define gráfico de Globo
