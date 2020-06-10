@@ -631,8 +631,7 @@ def update_graph(university):
 
     # 10.2 > Define gráfico da evolução do nº de estudandes
     measure1 = px.bar(data_frame=df_univ, x=df_univ['Year'], y=df_univ['Number_students'], orientation='v', opacity=0.9,
-                      barmode='relative', height=218, width=210, color_discrete_sequence=["DarkCyan"],
-                      title={'text': '<b>Nº of Students', 'y': 0.95, 'x': 0.6, 'xanchor': 'center', 'yanchor': 'top'})
+                      barmode='relative', height=218, width=210, color_discrete_sequence=["DarkCyan"])
     measure1.update_layout(margin=dict(l=5, r=10, t=23, b=5), font=dict(size=10), titlefont=dict(size=10),
                            paper_bgcolor="rgba(95, 158, 160, 0)",
                            yaxis=dict(title_text="", showgrid=False, zeroline=False),
