@@ -622,75 +622,84 @@ def update_graph(university):
     df_univ = df.loc[df['University'] == university]
     # 10.1 > Define gráfico da evolução do rank da universidade
     figun = px.scatter(df_univ, x=df_univ['Year'], y=df_univ['ScoreResult'], width=450, height=450,
-                       title=dict(text='<b>World Rank: Score Results <br> </b> <i> evolution 2016-2020',
-                                  y=0.9, x=0.5, xanchor='center', yanchor='top'))
+                       title='<b>World Rank: Score Results <br> </b> <i> evolution 2016-2020')
     figun.update_layout(plot_bgcolor='rgba(255, 255, 255, 0.1)', paper_bgcolor='rgba(95, 158, 160, 0)',
-                        titlefont=dict(size=15))
+                        titlefont=dict(size=15),
+                        title={'y': 0.9, 'x': 0.5, 'xanchor': 'center', 'yanchor': 'top'})
+
     figun.update_traces(marker=dict(size=30, color='#004080', line=dict(width=2, color='white'), opacity=0.8),
                         selector=dict(mode='markers'))
 
     # 10.2 > Define gráfico da evolução do nº de estudandes
     measure1 = px.bar(data_frame=df_univ, x=df_univ['Year'], y=df_univ['Number_students'], orientation='v', opacity=0.9,
                       barmode='relative', height=218, width=210, color_discrete_sequence=["DarkCyan"],
-                      title={'text': '<b>Nº of Students', 'y': 0.95, 'x': 0.6, 'xanchor': 'center', 'yanchor': 'top'})
+                      title='<b>Nº of Students')
     measure1.update_layout(margin=dict(l=5, r=10, t=23, b=5), font=dict(size=10), titlefont=dict(size=10),
                            paper_bgcolor="rgba(95, 158, 160, 0)",
+                           title={'y': 0.95, 'x': 0.6, 'xanchor': 'center', 'yanchor': 'top'},
                            yaxis=dict(title_text="", showgrid=False, zeroline=False),
                            xaxis=dict(title_text="", showgrid=False, zeroline=False))
     # 10.3 > Define gráfico da evolução do nº de estudandes por funcionario
     measure2 = px.bar(data_frame=df_univ, x=df_univ['Year'], y=df_univ['Numbstudentsper_Staff'], orientation='v',
                       opacity=0.9, barmode='relative', height=218, width=210, color_discrete_sequence=["CadetBlue"],
-                      title={'text': '<b>Nº of Students per staff', 'y': 0.95, 'x': 0.6, 'xanchor': 'center', 'yanchor': 'top'})
+                      title='<b>Nº of Students per staff')
     measure2.update_layout(margin=dict(l=10, r=10, t=23, b=5), font=dict(size=10), titlefont=dict(size=10),
                            paper_bgcolor="rgba(95, 158, 160, 0)",
+                           title={'y': 0.95, 'x': 0.6, 'xanchor': 'center', 'yanchor': 'top'},
                            yaxis=dict(title_text="", showgrid=False, zeroline=False),
                            xaxis=dict(title_text="", showgrid=False, zeroline=False))
     # 10.4 > Define gráfico da evolução do Teaching
     measure3 = px.bar(data_frame=df_univ, x=df_univ['Year'], y=df_univ['Teaching'], orientation='v', opacity=0.9,
                       barmode='relative', height=218, width=210, color_discrete_sequence=["DarkSeaGreen"],
-                      title={'text': '<b>Teaching', 'y': 0.95, 'x': 0.6, 'xanchor': 'center', 'yanchor': 'top'})
+                      title='<b>Teaching')
     measure3.update_layout(margin=dict(l=10, r=10, t=23, b=5), font=dict(size=10), titlefont=dict(size=10),
                            paper_bgcolor="rgba(95, 158, 160, 0)",
+                           title={'y': 0.95, 'x': 0.6, 'xanchor': 'center', 'yanchor': 'top'},
                            yaxis=dict(title_text="", showgrid=False, zeroline=False),
                            xaxis=dict(title_text="", showgrid=False, zeroline=False))
     # 10.5 > Define gráfico da evolução do Research
     measure4 = px.bar(data_frame=df_univ, x=df_univ['Year'], y=df_univ['Research'], orientation='v', opacity=0.9,
                       barmode='relative', height=218, width=210, color_discrete_sequence=["ForestGreen"],
-                      title={'text': '<b>Research', 'y': 0.95, 'x': 0.6, 'xanchor': 'center', 'yanchor': 'top'})
+                      title='<b>Research')
     measure4.update_layout(margin=dict(l=10, r=10, t=23, b=5), font=dict(size=10), titlefont=dict(size=10),
                            paper_bgcolor="rgba(95, 158, 160, 0)",
+                           title={'y': 0.95, 'x': 0.6, 'xanchor': 'center', 'yanchor': 'top'},
                            yaxis=dict(title_text="", showgrid=False, zeroline=False),
                            xaxis=dict(title_text="", showgrid=False, zeroline=False))
     # 10.6 > Define gráfico da evolução do Citations
     measure5 = px.bar(data_frame=df_univ, x=df_univ['Year'], y=df_univ['Citations'], orientation='v', opacity=0.9,
                       barmode='relative', height=218, width=210, color_discrete_sequence=["DarkOliveGreen"],
-                      title={'text': '<b>Citations', 'y': 0.95, 'x': 0.6, 'xanchor': 'center', 'yanchor': 'top'})
+                      title='<b>Citations')
     measure5.update_layout(margin=dict(l=5, r=10, t=23, b=5), font=dict(size=10), titlefont=dict(size=10),
                            paper_bgcolor="rgba(95, 158, 160, 0)", xaxis=dict(showgrid=False, zeroline=False),
+                           title={'y': 0.95, 'x': 0.6, 'xanchor': 'center', 'yanchor': 'top'},
                            yaxis=dict(title_text="", showgrid=False, zeroline=False))
     # 10.7 > Define gráfico da evolução do Industry_Income
     measure6 = px.bar(data_frame=df_univ, x=df_univ['Year'], y=df_univ['Industry_Income'], orientation='v', opacity=0.9,
                       barmode='relative', height=218, width=210, color_discrete_sequence=["DarkSlateGrey"],
-                      title={'text': '<b>Industry Outcome', 'y': 0.95, 'x': 0.6, 'xanchor': 'center', 'yanchor': 'top'})
+                      title='<b>Industry Outcome')
     measure6.update_layout(margin=dict(l=10, r=10, t=23, b=5), font=dict(size=10), titlefont=dict(size=10),
                            paper_bgcolor="rgba(95, 158, 160, 0)", xaxis=dict(showgrid=False, zeroline=False),
+                           title={'y': 0.95, 'x': 0.6, 'xanchor': 'center', 'yanchor': 'top'},
                            yaxis=dict(title_text="", showgrid=False, zeroline=False))
     # 10.8 > Define gráfico da evolução do International_Outlook
     measure7 = px.bar(data_frame=df_univ, x=df_univ['Year'], y=df_univ['International_Outlook'],
                       opacity=0.9, orientation='v',
                       barmode='relative', height=218, width=210, color_discrete_sequence=["Gray"],
-                      title={'text': '<b>International Outlook', 'y': 0.95, 'x': 0.6, 'xanchor': 'center', 'yanchor': 'top'})
+                      title='<b>International Outlook')
     measure7.update_layout(margin=dict(l=10, r=10, t=23, b=5), font=dict(size=10), titlefont=dict(size=10),
                            paper_bgcolor="rgba(95, 158, 160, 0)", xaxis=dict(showgrid=False, zeroline=False),
+                           title={'y': 0.95, 'x': 0.6, 'xanchor': 'center', 'yanchor': 'top'},
                            yaxis=dict(title_text="", showgrid=False, zeroline=False))
     # 10.9 > Define gráfico da evolução do Pct_Female
     measure8 = px.bar(data_frame=df_univ, x=df_univ['Year'], y=df_univ['Pct_Female'], orientation='v', opacity=0.9,
                       barmode='stack', height=218, width=210, color_discrete_sequence=["magenta"],
-                      title={'text': '<b>% Females & Males', 'y': 0.95, 'x': 0.6, 'xanchor': 'center', 'yanchor': 'top'})
+                      title='<b>% Females & Males')
     aux = px.bar(data_frame=df_univ, x=df_univ['Year'], y=df_univ['PCT_Male'])
     measure8.add_trace(aux.data[0])
     measure8.update_layout(margin=dict(l=10, r=10, t=23, b=0), font=dict(size=10), titlefont=dict(size=10),
                            paper_bgcolor="rgba(95, 158, 160, 0)", xaxis=dict(showgrid=False, zeroline=False),
+                           title={'y': 0.95, 'x': 0.6, 'xanchor': 'center', 'yanchor': 'top'},
                            yaxis=dict(title_text="", showgrid=False, zeroline=False))
 
     return figun, measure1, measure2, measure3, measure4, measure5, measure6, measure7, measure8
@@ -723,13 +732,13 @@ corr1 = px.scatter(df,
                    y=df['ScoreResult'],
                    color=df['Year'].apply(str),
                    hover_data=['University'],
-                   #title={'text': '<b>Score Results </b><br>    vs   <br><b>Nº Students',
-                   #       'y': 0.97, 'x': 0.55, 'xanchor': 'center', 'yanchor': 'top'},
+                   title='<b>Score Results </b><br>    vs   <br><b>Nº Students',
                    height=460, width=290,
                    color_discrete_sequence=px.colors.sequential.Viridis_r,
                    opacity=0.8
                    )
 corr1.update_layout(margin=dict(l=0, r=0, t=60, b=10, pad=0),
+                    title={'y': 0.97, 'x': 0.55, 'xanchor': 'center', 'yanchor': 'top'},
                     yaxis=dict(showgrid=False, zeroline=False, titlefont=dict(size=12)),
                     xaxis=dict(title_text="Nº Students", showgrid=False, zeroline=False, titlefont=dict(size=12)),
                     titlefont=dict(size=13), showlegend=True,
@@ -770,13 +779,13 @@ corr2 = px.scatter(df,
                    y=df['ScoreResult'],
                    color=df['Year'].apply(str),
                    hover_data=['University'],
-                   #title={'text': '<b>Score Results </b><br>    vs   <br><b>%Females',
-                   #       'y': 0.97, 'x': 0.56, 'xanchor': 'center', 'yanchor': 'top'},
+                   title='<b>Score Results </b><br>    vs   <br><b>%Females',
                    height=460, width=290,
                    color_discrete_sequence=px.colors.sequential.Viridis_r,
                    opacity=0.8
                    )
 corr2.update_layout(margin=dict(l=0, r=0, t=60, b=0, pad=0),
+                    title={'y': 0.97, 'x': 0.56, 'xanchor': 'center', 'yanchor': 'top'},
                     yaxis=dict(showgrid=False, zeroline=False),
                     xaxis=dict(title_text="%Female", showgrid=False, zeroline=False, titlefont=dict(size=12)),
                     titlefont=dict(size=13), showlegend=True,
@@ -817,8 +826,7 @@ corr3 = px.scatter(df,
                    y=df['ScoreResult'],
                    color=df['Year'].apply(str),
                    hover_data=['University'],
-                   #title={'text': '<b>Score Results </b><br>    vs   <br><b>Nº Students per staff',
-                   #       'y': 0.97, 'x': 0.56, 'xanchor': 'center', 'yanchor': 'top'},
+                   title='<b>Score Results </b><br>    vs   <br><b>Nº Students per staff',
                    height=460, width=290,
                    color_discrete_sequence=px.colors.sequential.Viridis_r,
                    opacity=0.8
@@ -828,6 +836,7 @@ corr3.update_layout(margin=dict(l=0, r=0, t=60, b=0, pad=0),
                     xaxis=dict(title_text="Nº Students per staff", showgrid=False,
                                zeroline=False, titlefont=dict(size=12)),
                     titlefont=dict(size=13), showlegend=True,
+                    title={'y': 0.97, 'x': 0.56, 'xanchor': 'center', 'yanchor': 'top'},
                     legend_orientation="h", legend_title_text='')
 minx1 = df2016.loc[df2016['Rank'] == 1]['Numbstudentsper_Staff'].values[0]
 minx2 = df2017.loc[df2017['Rank'] == 1]['Numbstudentsper_Staff'].values[0]
@@ -866,8 +875,6 @@ corr4 = px.scatter(df,
                    color=df['Year'].apply(str),
                    hover_data=['University'],
                    title='<b>Score Results </b><br>    vs   <br><b>% Students International Students',
-                   #title={'text': '<b>Score Results </b><br>    vs   <br><b>% Students International Students',
-                   #       'y': 0.97, 'x': 0.55, 'xanchor': 'center', 'yanchor': 'top'},
                    height=460, width=290,
                    color_discrete_sequence=px.colors.sequential.Viridis_r,
                    opacity=0.8
@@ -876,6 +883,7 @@ corr4.update_layout(margin=dict(l=0, r=0, t=60, b=0, pad=0),
                     yaxis=dict(showgrid=False, zeroline=False),
                     xaxis=dict(title_text="% International Students", showgrid=False, zeroline=False, titlefont=dict(size=12)),
                     titlefont=dict(size=13), showlegend=True,
+                    title={'y': 0.97, 'x': 0.55, 'xanchor': 'center', 'yanchor': 'top'},
                     legend_orientation="h", legend_title_text='')
 minx1 = df2016.loc[df2016['Rank'] == 1]['International_Students'].values[0]
 minx2 = df2017.loc[df2017['Rank'] == 1]['International_Students'].values[0]
