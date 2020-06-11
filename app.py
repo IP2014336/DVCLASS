@@ -880,12 +880,13 @@ def update_output(n_clicks, trigger, quest1, quest2, quest3, quest4, quest5, que
             resposta = '1: ' + str(quest1) + ' 2: ' + str(quest2) + ' 3: ' + str(quest3) + ' 4: ' + str(quest4) + \
                        ' 5: ' + str(quest5) + ' 6: ' + str(quest6) + ' Quiz: ' + str(quiz) + ' comment: ' + str(comment)
             resposta = resposta.encode('utf-8', 'ignore').decode('utf-8')
+            password = '!Nova!Heroku2020'
             message = """\
             Subject: Hi there
 
             This message is sent from Python.""" + resposta
             with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
-                server.login("IMS.GrupoTopUniv@gmail.com", '!Nova!Heroku2020')
+                server.login("IMS.GrupoTopUniv@gmail.com", password)
                 server.sendmail("IMS.GrupoTopUniv@gmail.com", "IMS.GrupoTopUniv@gmail.com", message)
             return 'Feedback submitted. Thank you!'
         else:
