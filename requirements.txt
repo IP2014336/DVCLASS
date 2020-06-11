@@ -9,5 +9,4 @@ pandas
 numpy
 dash_bootstrap_components
 pillow
-smtplib
 ssl
