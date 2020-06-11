@@ -46,7 +46,7 @@ context = ssl.create_default_context()
 #     7.4.3 > Call de 11 gráficos de barras de indicadores da universidade
 #   7.5 > Tab de Indicadores (estática)
 #     7.5.1 > Call de 4 scatter plots de indicadores vs score
-#   7.6 > Tab de feedback (exemplificativo, não recolhe efetivamente o feedback...)
+#   7.6 > Tab de feedback
 #     7.6.1 > Título
 #     7.6.2 > Perguntas
 #     7.6.3 > Caixa de comentario
@@ -74,7 +74,7 @@ context = ssl.create_default_context()
 # 11 > Define 4 scatter plots de indicadores vs score
 #   11.1 > Constroi 1º gráfico
 #   11.2 > Anotaçoes ao 1º gráfico
-# 12 > Define botão de submissão
+# 12 > Define botão de submissão e envia resultado para email
 # Fim do Indice
 #######################################
 
@@ -316,7 +316,7 @@ def render_content(tab):
                                 'border': 'thin solid #888888', 'box-shadow': '5px 5px #888888'})
              ], style={'display': 'flex'})
         ])
-    elif tab == 'tab-6':  # 7.6 > Tab de feedback (exemplificativo, não recolhe efetivamente o feedback...)
+    elif tab == 'tab-6':  # 7.6 > Tab de feedback
         return html.Div([
             # 7.6.1 > Título
             html.H1('Help us improve!', style={'color': '#669999', 'text-shadow': '2px 0px black'}),
@@ -860,7 +860,7 @@ for ano in df['Year'].unique():
                          showarrow=True, arrowhead=7, ax=30, ay=0, font=dict(size=7))
 
 
-# 12 > Define botão de submissão
+# 12 > Define botão de submissão e envia resultado para email
 @app.callback(
     dash.dependencies.Output('container-button-basic', 'children'),
     [dash.dependencies.Input('submitbutton', 'n_clicks'),
