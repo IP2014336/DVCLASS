@@ -74,7 +74,7 @@ context = ssl.create_default_context()
 # 11 > Define 4 scatter plots de indicadores vs score
 #   11.1 > Constroi 1º gráfico
 #   11.2 > Anotaçoes ao 1º gráfico
-# 12 > Define botão de submissão e envia resultado para email
+# 12 > Define botão de submissão e envio de formulario para email
 # Fim do Indice
 #######################################
 
@@ -860,7 +860,7 @@ for ano in df['Year'].unique():
                          showarrow=True, arrowhead=7, ax=30, ay=0, font=dict(size=7))
 
 
-# 12 > Define botão de submissão e envia resultado para email
+# 12 > Define botão de submissão
 @app.callback(
     dash.dependencies.Output('container-button-basic', 'children'),
     [dash.dependencies.Input('submitbutton', 'n_clicks'),
@@ -880,7 +880,6 @@ def update_output(n_clicks, trigger, quest1, quest2, quest3, quest4, quest5, que
             resposta = '1: ' + str(quest1) + ' 2: ' + str(quest2) + ' 3: ' + str(quest3) + ' 4: ' + str(quest4) + \
                        ' 5: ' + str(quest5) + ' 6: ' + str(quest6) + ' Quiz: ' + str(quiz) + ' comment: ' + str(comment)
             resposta = resposta.encode('utf-8', 'ignore').decode('utf-8')
-            print(resposta)
             message = """\
             Subject: Hi there
 
