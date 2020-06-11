@@ -9,6 +9,11 @@ import plotly.express as px
 from PIL import Image
 import requests
 from io import BytesIO
+import smtplib
+import ssl
+port = 465  # For SSL
+# Create a secure SSL context
+context = ssl.create_default_context()
 
 #######################################
 # Inicio do Indice
@@ -129,23 +134,14 @@ RadioYear = dcc.RadioItems(
     options=Year_options,
     value=2020
 )
-RadioYesNo = dcc.RadioItems(
-    id='RadioYesNo',
-    options=YesNo_options
-)
-RadioGrade = dcc.RadioItems(
-    id='RadioGrade',
-    options=grades_options
-)
-RadioQuest = dcc.RadioItems(
-    id='RadioGrade',
-    options=quest_options
-)
-RadioMeasures = dcc.RadioItems(
-    id='RadioMeasures',
-    options=Measures_options,
-    value='Research'
-)
+RadioGrade1 = dcc.RadioItems(id='Radio_Grade1', options=grades_options)
+RadioGrade2 = dcc.RadioItems(id='Radio_Grade2', options=grades_options)
+RadioGrade3 = dcc.RadioItems(id='Radio_Grade3', options=grades_options)
+RadioGrade4 = dcc.RadioItems(id='Radio_Grade4', options=grades_options)
+RadioGrade5 = dcc.RadioItems(id='Radio_Grade5', options=grades_options)
+RadioGrade6 = dcc.RadioItems(id='Radio_Grade6', options=grades_options)
+RadioQuest = dcc.RadioItems(id='Radio_Quest', options=quest_options)
+
 SliderYear = dcc.RangeSlider(
     id='year_slider',
     min=2016,
@@ -329,47 +325,47 @@ def render_content(tab):
                 html.Div([html.Br()], style={'width': '5%', 'height': '20px'}),
                 html.Div([html.P("The visualizations are intuitive and easy to use")], style={'width': '35%', 'height': '20px'}),
                 html.Div([html.Br()], style={'width': '3%', 'height': '20px'}),
-                html.Div([RadioGrade], style={'marginBottom': '0px', 'marginTop': '15px', 'height': '20px'})
+                html.Div([RadioGrade1], style={'marginBottom': '0px', 'marginTop': '15px', 'height': '20px'})
             ], style={'display': 'flex'}),
             html.Div([
                 html.Div([html.Br()], style={'width': '5%', 'height': '20px'}),
                 html.Div([html.P("The visualizations loaded quickly")], style={'width': '35%', 'height': '20px'}),
                 html.Div([html.Br()], style={'width': '3%', 'height': '20px'}),
-                html.Div([RadioGrade], style={'marginBottom': '0px', 'marginTop': '15px', 'height': '20px'})
+                html.Div([RadioGrade2], style={'marginBottom': '0px', 'marginTop': '15px', 'height': '20px'})
             ], style={'display': 'flex'}),
             html.Div([
                 html.Div([html.Br()], style={'width': '5%', 'height': '20px'}),
                 html.Div([html.P("This is an important subject to me")], style={'width': '35%', 'height': '20px'}),
                 html.Div([html.Br()], style={'width': '3%', 'height': '20px'}),
-                html.Div([RadioGrade], style={'marginBottom': '0px', 'marginTop': '15px', 'height': '20px'})
+                html.Div([RadioGrade3], style={'marginBottom': '0px', 'marginTop': '15px', 'height': '20px'})
             ], style={'display': 'flex'}),
             html.Div([
                 html.Div([html.Br()], style={'width': '5%', 'height': '20px'}),
                 html.Div([html.P("I was able to gather relevant information")],
                          style={'width': '35%', 'height': '20px'}),
                 html.Div([html.Br()], style={'width': '3%', 'height': '20px'}),
-                html.Div([RadioGrade], style={'marginBottom': '0px', 'marginTop': '15px', 'height': '20px'})
+                html.Div([RadioGrade4], style={'marginBottom': '0px', 'marginTop': '15px', 'height': '20px'})
             ], style={'display': 'flex'}),
             html.Div([
                 html.Div([html.Br()], style={'width': '5%', 'height': '20px'}),
                 html.Div([html.P("The application has all the options I expected")],
                          style={'width': '35%', 'height': '20px'}),
                 html.Div([html.Br()], style={'width': '3%', 'height': '20px'}),
-                html.Div([RadioGrade], style={'marginBottom': '0px', 'marginTop': '15px', 'height': '20px'})
+                html.Div([RadioGrade5], style={'marginBottom': '0px', 'marginTop': '15px', 'height': '20px'})
             ], style={'display': 'flex'}),
             html.Div([
                 html.Div([html.Br()], style={'width': '5%', 'height': '20px'}),
                 html.Div([html.P("I am satisfied with the overall application")],
                          style={'width': '35%', 'height': '20px'}),
                 html.Div([html.Br()], style={'width': '3%', 'height': '20px'}),
-                html.Div([RadioGrade], style={'marginBottom': '0px', 'marginTop': '15px', 'height': '20px'})
+                html.Div([RadioGrade6], style={'marginBottom': '0px', 'marginTop': '15px', 'height': '20px'})
             ], style={'display': 'flex'}),
             html.Div([
                 html.Div([html.Br()], style={'width': '5%'}),
                 html.Div([html.P("Do you now know which is the world best University in 2020?")],
                          style={'width': '35%'}),
                 html.Div([html.Br()], style={'width': '3%'}),
-                html.Div([RadioQuest], style={'marginBottom': '0px', 'marginTop': '15px'})
+                html.Div(RadioQuest, style={'marginBottom': '0px', 'marginTop': '15px'})
             ], style={'display': 'flex'}),
             html.Div([
                 html.Div([html.Br()], style={'width': '5%'}),
@@ -378,6 +374,7 @@ def render_content(tab):
                 # 7.6.3 > Caixa de comentario
                 html.Div([
                     dcc.Textarea(
+                        id='comentario',
                         value='write here',
                         style={'width': 550, 'height': 50, 'font-style': 'italic', 'backgroundColor': '#e6e6e6'},
                     )])
@@ -387,6 +384,7 @@ def render_content(tab):
                 # 7.6.4 > Botão de submissao
                 html.Div([html.Br()], style={'width': '36%'}),
                 html.Div([html.Button(' Submit ', id='submitbutton', n_clicks=0, style={})]),
+                html.Div(id='trigger', children=0, style=dict(display='none')),
                 html.Div([html.Br()], style={'width': '1%'}),
                 html.Div(id='container-button-basic',
                          style={'font-style': 'italic', 'font-size': '12px', 'marginTop': '5px'})
@@ -865,11 +863,34 @@ for ano in df['Year'].unique():
 # 12 > Define botão de submissão
 @app.callback(
     dash.dependencies.Output('container-button-basic', 'children'),
-    [dash.dependencies.Input('submitbutton', 'n_clicks')])
-def update_output(n_clicks):
-    if n_clicks > 0:
-        return 'Feedback submitted. Thank you!'
+    [dash.dependencies.Input('submitbutton', 'n_clicks'),
+     Input('trigger', 'children'),
+     Input('Radio_Grade1', 'value'),
+     Input('Radio_Grade2', 'value'),
+     Input('Radio_Grade3', 'value'),
+     Input('Radio_Grade4', 'value'),
+     Input('Radio_Grade5', 'value'),
+     Input('Radio_Grade6', 'value'),
+     Input('Radio_Quest', 'value'),
+     Input('comentario', 'value')])
+def update_output(n_clicks, trigger, quest1, quest2, quest3, quest4, quest5, quest6, quiz, comment):
+    contextc = dash.callback_context.triggered[0]['prop_id'].split('.')[0]
+    if contextc == 'submitbutton':
+        if n_clicks == 1:
+            resposta = '1: ' + str(quest1) + ' 2: ' + str(quest2) + ' 3: ' + str(quest3) + ' 4: ' + str(quest4) + \
+                       ' 5: ' + str(quest5) + ' 6: ' + str(quest6) + ' Quiz: ' + str(quiz) + ' comment: ' + str(comment)
+            resposta = resposta.encode('utf-8', 'ignore').decode('utf-8')
+            print(resposta)
+            message = """\
+            Subject: Hi there
 
+            This message is sent from Python.""" + resposta
+            with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
+                server.login("IMS.GrupoTopUniv@gmail.com", '!Nova!Heroku2020')
+                server.sendmail("IMS.GrupoTopUniv@gmail.com", "IMS.GrupoTopUniv@gmail.com", message)
+            return 'Feedback submitted. Thank you!'
+        else:
+            return 'Feedback had already been submitted'
 
 
 if __name__ == '__main__':
